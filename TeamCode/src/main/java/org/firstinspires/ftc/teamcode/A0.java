@@ -13,7 +13,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvInternalCamera;
+import org.firstinspires.ftc.teamcode.GeneralDetector;
 
 @Autonomous(name="#T>Auto0", group="Linear Opmode")
 //@Disabled
@@ -71,12 +75,6 @@ public class A0 extends LinearOpMode {
 
         Drive(0,.5,0,700);
 
-        while(sDist.getDistance(DistanceUnit.CM)>=3){
-            Drive(0,.45,0,100);
-        }
-
-
-
             cR = sColor.red();
             cG = sColor.green();
             cB = sColor.blue();
@@ -93,6 +91,17 @@ public class A0 extends LinearOpMode {
 
             telemetry.update();
 
+
+        OpenCvCamera phoneCam;
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        phoneCam.openCameraDevice();
+        phoneCam.setPipeline(new GeneralDetector());
+        phoneCam.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
+
+        while (opModeIsActive()) {
+
+        }
 
     }
 
