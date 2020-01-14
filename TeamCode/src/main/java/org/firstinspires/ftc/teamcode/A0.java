@@ -97,7 +97,7 @@ public class A0 extends LinearOpMode {
         phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
         phoneCam.openCameraDevice();
         phoneCam.setPipeline(new GeneralDetector());
-        phoneCam.startStreaming(320,240, OpenCvCameraRotation.UPRIGHT);
+        phoneCam.startStreaming(320 * 5,240 * 5, OpenCvCameraRotation.UPRIGHT);
 
         while (opModeIsActive()) {
 
