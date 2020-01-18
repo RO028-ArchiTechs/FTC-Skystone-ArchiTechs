@@ -96,7 +96,7 @@ public class GeneralController {
         return cur_opmode.gamepad1.dpad_down;
     }
 
-    public Object getDistance(DistanceUnit dist_unit) {
+    public double getDistance(DistanceUnit dist_unit) {
         return sDist.getDistance(dist_unit);
     }
 }
