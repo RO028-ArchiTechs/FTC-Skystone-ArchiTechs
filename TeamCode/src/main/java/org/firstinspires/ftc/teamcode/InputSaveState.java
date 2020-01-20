@@ -19,7 +19,7 @@ public class InputSaveState extends SaveState{
     }
 
     public boolean is_invalid() {
-        return time != -1;
+        return time == -1;
     }
 
     public void read() {

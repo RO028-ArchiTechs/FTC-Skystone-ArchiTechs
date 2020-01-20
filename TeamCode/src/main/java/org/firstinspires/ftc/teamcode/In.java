@@ -61,11 +61,16 @@ public class In {
         if (disabled) return "-1";
         String ans = "";
         int id = 0;
-        while((line.charAt(id) != ',') && (line.charAt(id) != '\n')){
+        while(id < line.length() && (line.charAt(id) != ',') && (line.charAt(id) != '\n')){
+            ans = ans + line.charAt(id);
             id++;
         }
-        ans = line.substring(0,id - 1);
-        line = line.substring(id + 1);
+        if(id + 1 >= line.length()){
+            line = null;
+        }
+        else {
+            line = line.substring(id + 1);
+        }
         return ans;
     }
 

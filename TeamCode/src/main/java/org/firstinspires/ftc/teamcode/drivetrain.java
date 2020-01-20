@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
+import android.os.Environment;
 
+import org.firstinspires.ftc.teamcode.Log;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cCompassSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -49,6 +51,12 @@ public class drivetrain extends LinearOpMode {
         driveFR.setDirection(DcMotor.Direction.REVERSE);
         driveRL.setDirection(DcMotor.Direction.FORWARD);
         driveRR.setDirection(DcMotor.Direction.REVERSE);
+/*
+        Log tmp = new Log(Environment.getExternalStorageDirectory().getPath() + "/" + "FIRST_","save1",false);
+
+        tmp.addData("sa imi pugi sula");
+        tmp.update();
+        tmp.close();*/
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -79,7 +87,6 @@ public class drivetrain extends LinearOpMode {
         double  power_FL, power_FR,
 
                 power_RL, power_RR;
-
 
 
         // run until the end of the match (driver presses STOP)
@@ -178,8 +185,8 @@ public class drivetrain extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + controller.get_runtime().toString());
             telemetry.addData("MODE", ": (%d)", MODE);
             telemetry.addData("GEAR", ": %.2f", Gear_shift);
-            telemetry.addData("Distance (cm)",
-                    String.format(Locale.US, "%.02f", controller.getDistance(DistanceUnit.CM)));
+           /// telemetry.addData("Distance (cm)",
+           ///         String.format(Locale.US, "%.02f", controller.getDistance(DistanceUnit.CM)));
             telemetry.addData("Color", "\nR%.2f\nG%.2f\nB%.2f", cR, cG, cB);
             telemetry.addData("HDG","%.2f",A);
             telemetry.addData("IN","X%.2f Y%.2f",LocalX,LocalY);

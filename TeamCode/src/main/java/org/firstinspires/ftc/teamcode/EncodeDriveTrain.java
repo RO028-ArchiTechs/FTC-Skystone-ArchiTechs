@@ -20,7 +20,7 @@ import org.firstinspires.ftc.teamcode.EncodeController;
 import java.util.Locale;
 
 
-@TeleOp(name="#T>drivetrain", group="Linear Opmode")
+@TeleOp(name="#T>EncodeDrivetrain", group="Linear Opmode")
 //@Disabled
 public class EncodeDriveTrain extends LinearOpMode {
 

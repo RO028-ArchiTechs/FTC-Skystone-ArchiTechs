@@ -22,6 +22,7 @@ public class Log {
         if (logTime) startTime = System.nanoTime();
         this.logTime = logTime;
         File directory = new File(directoryPath);
+        line = "";
         //noinspection ResultOfMethodCallIgnored
         directory.mkdir();
         try {

@@ -27,9 +27,9 @@ public class GeneralController {
     public GeneralController(LinearOpMode opmode){
         ///setup Hardware
         cur_opmode = opmode; /// as far as i'm concerned, this should make cur_opmode behave like a C/C++ pointer, not a copy of the object
-        sColor = cur_opmode.hardwareMap.get(ColorSensor.class, "CLR");
-        sDist = cur_opmode.hardwareMap.get(DistanceSensor.class, "CLR");
-        sCompass = cur_opmode.hardwareMap.get(ModernRoboticsI2cCompassSensor.class, "HDG");
+        ///sColor = cur_opmode.hardwareMap.get(ColorSensor.class, "CLR");
+        ///sDist = cur_opmode.hardwareMap.get(DistanceSensor.class, "CLR");
+        ///sCompass = cur_opmode.hardwareMap.get(ModernRoboticsI2cCompassSensor.class, "HDG");
     }
 
     public double get_left_stick_y() {
@@ -49,19 +49,24 @@ public class GeneralController {
     }
 
     public double getDirection() {
-        return (double)sCompass.getDirection();
+        ///return (double)sCompass.getDirection();
+            return -1;
+
     }
 
     public double red() {
-        return sColor.red();
+    //    return sColor.red();
+        return -1;
     }
 
     public double green() {
-        return sColor.green();
+     //   return sColor.green();
+        return -1;
     }
 
     public double blue() {
-        return sColor.blue();
+     //   return sColor.blue();
+        return -1;
     }
 
     public boolean get_x() {
@@ -97,6 +102,7 @@ public class GeneralController {
     }
 
     public double getDistance(DistanceUnit dist_unit) {
-        return sDist.getDistance(dist_unit);
+///        return sDist.getDistance(dist_unit);
+        return -1;
     }
 }
