@@ -18,7 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import java.util.Locale;
 
 
-@TeleOp(name="#T>drivetrain", group="Linear Opmode")
+@TeleOp(name="T>drivetrain", group="Linear Opmode")
 //@Disabled
 public class drivetrain extends LinearOpMode {
 

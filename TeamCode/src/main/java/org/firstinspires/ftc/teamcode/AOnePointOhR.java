@@ -12,29 +12,36 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.HardwareDrivetrain;
+
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 
-@Autonomous(name="T>Auto0", group="Linear Opmode")
+@Autonomous(name="~v1.0-right", group="Linear Opmode")
 //@Disabled
-public class A0 extends LinearOpMode {
+public class AOnePointOhR extends LinearOpMode {
 
     // Declare Hardware, timing, etc
     private ElapsedTime runtime = new ElapsedTime();
     HardwareDrivetrain drive = new HardwareDrivetrain();
-    private Servo mechGrab  = null;
-    private ColorSensor sColor = null;
-    private DistanceSensor sDist = null;
+    private Servo  mechGrab = null;
 
+
+    /*
+    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;
+    static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;
+    static final double     WHEEL_DIAMETER_CM       = 4.0 ;
+    static final double     COUNTS_PER_CM           = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION)/
+            (WHEEL_DIAMETER_CM * Math.PI);
+
+     */
     @Override
     public void runOpMode() throws InterruptedException
     {
 
         //Setup Hardware
+        drive.init(hardwareMap);
         mechGrab = hardwareMap.get(Servo.class, "GR");
-
-        sColor = hardwareMap.get(ColorSensor.class, "CLR");
-        sDist = hardwareMap.get(DistanceSensor.class, "CLR");
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -51,34 +58,33 @@ public class A0 extends LinearOpMode {
 
                 power_RL, power_RR;
 
-        double  cR=0,
-                cG=0,
-                cB=0;
+
 
 
         // run until the end of the match (driver presses STOP)
-
-        Drive(0,.5,0,700);
-
-
-
-
-
-            cR = sColor.red();
-            cG = sColor.green();
-            cB = sColor.blue();
-
-            // Send calculated power to wheels
+        mechGrab.setPosition(1.0);
+        Drive(.7,0,0,900);
+        Stop();
+        Drive(0,.5,0,2500);
+        Stop();
 
 
-            // Show the elapsed game time and wheel power.
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
 
-            telemetry.addData("IN", "Y (%.2f), X (%.2f)", vY, vX);
-            telemetry.addData("Color", "R%.2f\nG%.2f\nB%.2f", cR, cG, cB);
-            //telemetry.addData("Motors", "FL (%.2f), FR (%.2f), RL (%.2f), RR (%.2f)", power_FL, power_FR, power_RL, power_RR);
 
-            telemetry.update();
+
+
+
+        // Send calculated power to wheels
+
+
+        // Show the elapsed game time and wheel power.
+        telemetry.addData("Status", "Run Time: " + runtime.toString());
+
+        telemetry.addData("IN", "Y (%.2f), X (%.2f)", vY, vX);
+
+        //telemetry.addData("Motors", "FL (%.2f), FR (%.2f), RL (%.2f), RR (%.2f)", power_FL, power_FR, power_RL, power_RR);
+
+        telemetry.update();
 
 
     }
