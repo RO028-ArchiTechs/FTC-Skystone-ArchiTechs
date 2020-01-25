@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
-import android.os.Environment;
 
-import org.firstinspires.ftc.teamcode.Log;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cCompassSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -17,14 +15,14 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-import org.firstinspires.ftc.teamcode.GeneralController;
+import org.firstinspires.ftc.teamcode.DecodeController;
 
 import java.util.Locale;
 
 
-@TeleOp(name="T>drivetrain", group="Linear Opmode")
+@TeleOp(name="#T>DecodeDrivetrain", group="Linear Opmode")
 //@Disabled
-public class drivetrain extends LinearOpMode {
+public class DecodeDriveTrain extends LinearOpMode {
 
     // Declare Hardware, timing, etc
     private DcMotor driveFL = null;
@@ -37,7 +35,7 @@ public class drivetrain extends LinearOpMode {
     @Override
     public void runOpMode() {
         ///setup controller
-        GeneralController controller = new GeneralController(this);
+        DecodeController controller = new DecodeController(this);
 
         //Setup Hardware
         driveFL = hardwareMap.get(DcMotor.class, "FL");
@@ -51,12 +49,6 @@ public class drivetrain extends LinearOpMode {
         driveFR.setDirection(DcMotor.Direction.REVERSE);
         driveRL.setDirection(DcMotor.Direction.FORWARD);
         driveRR.setDirection(DcMotor.Direction.REVERSE);
-/*
-        Log tmp = new Log(Environment.getExternalStorageDirectory().getPath() + "/" + "FIRST_","save1",false);
-
-        tmp.addData("sa imi pugi sula");
-        tmp.update();
-        tmp.close();*/
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -89,9 +81,14 @@ public class drivetrain extends LinearOpMode {
                 power_RL, power_RR;
 
 
+
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             //READ INPUTS
+            controller.read_state();
+            if(controller.is_invalid()){
+                break;
+            }
             vY = -controller.get_left_stick_y();
             vX = controller.get_left_stick_x();
             vR = controller.get_right_stick_x();
@@ -185,8 +182,8 @@ public class drivetrain extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + controller.get_runtime().toString());
             telemetry.addData("MODE", ": (%d)", MODE);
             telemetry.addData("GEAR", ": %.2f", Gear_shift);
-           /// telemetry.addData("Distance (cm)",
-           ///         String.format(Locale.US, "%.02f", controller.getDistance(DistanceUnit.CM)));
+            telemetry.addData("Distance (cm)",
+                    String.format(Locale.US, "%.02f", controller.getDistance()));
             telemetry.addData("Color", "\nR%.2f\nG%.2f\nB%.2f", cR, cG, cB);
             telemetry.addData("HDG","%.2f",A);
             telemetry.addData("IN","X%.2f Y%.2f",LocalX,LocalY);
