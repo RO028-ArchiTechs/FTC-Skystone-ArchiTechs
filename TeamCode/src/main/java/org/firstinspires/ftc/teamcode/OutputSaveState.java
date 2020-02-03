@@ -34,6 +34,8 @@ public class OutputSaveState extends SaveState{
         this.dpad_down = controller.get_dpad_down();
         this.distance = controller.getDistance(DistanceUnit.CM);
         this.time = controller.get_runtime().milliseconds();
+        this.left_bumper = controller.get_left_bumper();
+        this.left_trigger = controller.get_left_trigger();
     }
 
     public void change(OutputSaveState other) {
@@ -54,6 +56,8 @@ public class OutputSaveState extends SaveState{
         this.dpad_down = other.dpad_down;
         this.distance = other.distance;
         this.time = other.time;
+        this.left_bumper = other.left_bumper;
+        this.left_trigger = other.left_trigger;
     }
 
 
@@ -78,6 +82,8 @@ public class OutputSaveState extends SaveState{
         out.addData(dpad_down);
         out.addData(distance);
         out.addData(time);
+        out.addData(left_bumper);
+        out.addData(left_trigger);
         out.update();
     }
 

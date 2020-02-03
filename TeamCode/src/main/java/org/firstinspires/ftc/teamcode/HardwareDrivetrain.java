@@ -83,11 +83,12 @@ public class  HardwareDrivetrain
 
 
         // Set all motors to run with encoders.
+        /*
         FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        */
 
     }
 }

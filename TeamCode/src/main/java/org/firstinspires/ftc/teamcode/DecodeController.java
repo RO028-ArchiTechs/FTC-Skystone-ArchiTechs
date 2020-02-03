@@ -83,6 +83,13 @@ public class DecodeController extends GeneralController {
         return last.dpad_down;
     }
 
+    public double get_left_trigger() {
+        return last.left_trigger;
+    }
+
+    public boolean get_left_bumper() {
+        return last.left_bumper;
+    }
     ///save states save their distance in cm
     ///change this if you need another disance unit
     public double getDistance() {

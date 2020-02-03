@@ -105,4 +105,12 @@ public class GeneralController {
 ///        return sDist.getDistance(dist_unit);
         return -1;
     }
+
+    public double get_left_trigger() {
+        return cur_opmode.gamepad1.left_trigger;
+    }
+
+    public boolean get_left_bumper() {
+        return cur_opmode.gamepad1.left_bumper;
+    }
 }

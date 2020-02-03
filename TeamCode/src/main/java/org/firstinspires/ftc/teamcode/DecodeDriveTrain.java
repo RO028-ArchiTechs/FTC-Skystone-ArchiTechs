@@ -29,6 +29,7 @@ public class DecodeDriveTrain extends LinearOpMode {
     private DcMotor driveFR = null;
     private DcMotor driveRL = null;
     private DcMotor driveRR = null;
+    private DcMotor mechExt = null;
     private Servo mechGrab = null;
 
 
@@ -43,7 +44,7 @@ public class DecodeDriveTrain extends LinearOpMode {
         driveRL = hardwareMap.get(DcMotor.class, "RL");
         driveRR = hardwareMap.get(DcMotor.class, "RR");
         mechGrab = hardwareMap.get(Servo.class, "GR");
-
+        mechExt = hardwareMap.get(DcMotor.class, "EXT");
 
         driveFL.setDirection(DcMotor.Direction.FORWARD);
         driveFR.setDirection(DcMotor.Direction.REVERSE);
@@ -75,12 +76,13 @@ public class DecodeDriveTrain extends LinearOpMode {
         double LocalX = 0, LocalY = 0; //robot speed in local coordinates
         double X=0, Y=0, A=0;
         double A0 =0;
+        double ext = 0;
+        int extDirection = 1;
         //OUTPUT
         double  power_FL, power_FR,
 
                 power_RL, power_RR;
-
-
+        double power_EXT;
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -99,7 +101,14 @@ public class DecodeDriveTrain extends LinearOpMode {
             cG = controller.green();
             cB = controller.blue();
 
+            ext = controller.get_left_trigger();
+
             if (controller.get_runtime().seconds()-delay > .3){
+                if (controller.get_left_bumper()){
+                    extDirection = -1;
+                } else {
+                    extDirection =1;
+                }
                 if(controller.get_x()){
                     GEAR ++;
 
@@ -121,7 +130,7 @@ public class DecodeDriveTrain extends LinearOpMode {
             }
 
             if(controller.get_dpad_up()){
-                mechGrab.setPosition(0);
+                mechGrab.setPosition(0.5);
             } else if (controller.get_dpad_down()) {
                 mechGrab.setPosition(1);
             }
@@ -148,6 +157,7 @@ public class DecodeDriveTrain extends LinearOpMode {
             vX *= Gear_shift;
             vY *= Gear_shift;
             vR *= Gear_shift;
+            power_EXT = ext * extDirection * Gear_shift;
 
             switch (MODE) {
                 case 0: {
@@ -176,7 +186,7 @@ public class DecodeDriveTrain extends LinearOpMode {
             driveFR.setPower(power_FR);
             driveRL.setPower(power_RL);
             driveRR.setPower(power_RR);
-
+            mechExt.setPower(power_EXT);
 
             // Telemetry feedback
             telemetry.addData("Status", "Run Time: " + controller.get_runtime().toString());

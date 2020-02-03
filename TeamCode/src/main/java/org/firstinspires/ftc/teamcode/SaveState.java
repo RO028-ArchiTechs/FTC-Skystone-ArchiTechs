@@ -8,6 +8,8 @@ import java.io.File;
 
 ///saves the state of inputs on the gamepad
 public class SaveState {
+    public double left_trigger;
+    public boolean left_bumper;
     double left_stick_y;
     double left_stick_x;
     double right_stick_y;
@@ -45,6 +47,8 @@ public class SaveState {
         dpad_down = false;
         distance = -1;
         time = -1;
+        left_bumper = false;
+        left_trigger = 0;
     }
 
     public boolean is_same(OutputSaveState other) {
@@ -62,7 +66,9 @@ public class SaveState {
         this.y == other.y &&
         this.dpad_up == other.dpad_up &&
         this.dpad_down == other.dpad_down &&
-        this.distance == other.distance;
+        this.distance == other.distance &&
+        this.left_bumper == other.left_bumper &&
+        this.left_trigger == other.left_trigger;
     }
 
     public void update(OutputSaveState tmp) {

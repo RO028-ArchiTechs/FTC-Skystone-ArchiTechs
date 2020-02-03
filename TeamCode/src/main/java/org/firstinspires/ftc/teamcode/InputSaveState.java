@@ -41,5 +41,7 @@ public class InputSaveState extends SaveState{
         dpad_down = in.getBoolean();
         distance = in.getDouble();
         time = in.getDouble();
+        left_bumper = in.getBoolean();
+        left_trigger = in.getDouble();
     }
 }
