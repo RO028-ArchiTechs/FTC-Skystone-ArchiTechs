@@ -113,4 +113,23 @@ public class GeneralController {
     public boolean get_left_bumper() {
         return cur_opmode.gamepad1.left_bumper;
     }
+
+
+    public boolean get_dpad_left() {
+        return cur_opmode.gamepad1.dpad_left;
+    }
+
+    public boolean get_dpad_right() {
+        return cur_opmode.gamepad1.dpad_right;
+    }
+
+
+    public double get_right_trigger() {
+        return cur_opmode.gamepad1.right_trigger;
+    }
+
+    public boolean get_right_bumper() {
+        return cur_opmode.gamepad1.right_bumper;
+    }
+
 }

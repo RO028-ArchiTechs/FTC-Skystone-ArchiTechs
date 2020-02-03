@@ -84,6 +84,10 @@ public class OutputSaveState extends SaveState{
         out.addData(time);
         out.addData(left_bumper);
         out.addData(left_trigger);
+        out.addData(dpad_left);
+        out.addData(dpad_right);
+        out.addData(right_bumper);
+        out.addData(right_trigger);
         out.update();
     }
 

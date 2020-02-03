@@ -90,6 +90,24 @@ public class DecodeController extends GeneralController {
     public boolean get_left_bumper() {
         return last.left_bumper;
     }
+
+    public boolean get_dpad_left() {
+        return last.dpad_left;
+    }
+
+    public boolean get_dpad_right() {
+        return last.dpad_right;
+    }
+
+
+    public double get_right_trigger() {
+        return last.right_trigger;
+    }
+
+    public boolean get_right_bumper() {
+        return last.right_bumper;
+    }
+
     ///save states save their distance in cm
     ///change this if you need another disance unit
     public double getDistance() {

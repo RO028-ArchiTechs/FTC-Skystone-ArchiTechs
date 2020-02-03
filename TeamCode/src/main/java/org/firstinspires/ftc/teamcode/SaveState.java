@@ -10,6 +10,10 @@ import java.io.File;
 public class SaveState {
     public double left_trigger;
     public boolean left_bumper;
+    public boolean right_bumper;
+    public double right_trigger;
+    public boolean dpad_right;
+    public boolean dpad_left;
     double left_stick_y;
     double left_stick_x;
     double right_stick_y;
@@ -49,6 +53,10 @@ public class SaveState {
         time = -1;
         left_bumper = false;
         left_trigger = 0;
+        dpad_left = false;
+        dpad_right = false;
+        right_bumper = false;
+        right_trigger = 0;
     }
 
     public boolean is_same(OutputSaveState other) {
@@ -68,7 +76,11 @@ public class SaveState {
         this.dpad_down == other.dpad_down &&
         this.distance == other.distance &&
         this.left_bumper == other.left_bumper &&
-        this.left_trigger == other.left_trigger;
+        this.left_trigger == other.left_trigger &&
+        this.dpad_left == other.dpad_left &&
+        this.dpad_right == other.dpad_right &&
+        this.right_bumper == other.right_bumper &&
+        this.right_trigger == other.right_trigger;
     }
 
     public void update(OutputSaveState tmp) {
