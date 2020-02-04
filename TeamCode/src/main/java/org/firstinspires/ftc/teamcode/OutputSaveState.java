@@ -98,4 +98,33 @@ public class OutputSaveState extends SaveState{
         out.close();
         out = null;
     }
+
+
+    public boolean is_same(OutputSaveState other) {//checks if a savestate is the same with another one(with no regard to time)
+        return this.left_stick_y == other.left_stick_y &&
+                this.left_stick_x == other.left_stick_x &&
+                this.right_stick_y == other.right_stick_y &&
+                this.right_stick_x == other.right_stick_x &&
+                this.direction == other.direction &&
+                this.red == other.red &&
+                this.green == other.green &&
+                this.blue == other.blue &&
+                this.a == other.a &&
+                this.b == other.b &&
+                this.x == other.x &&
+                this.y == other.y &&
+                this.dpad_up == other.dpad_up &&
+                this.dpad_down == other.dpad_down &&
+                this.distance == other.distance &&
+                this.left_bumper == other.left_bumper &&
+                this.left_trigger == other.left_trigger &&
+                this.dpad_left == other.dpad_left &&
+                this.dpad_right == other.dpad_right &&
+                this.right_bumper == other.right_bumper &&
+                this.right_trigger == other.right_trigger;
+    }
+
+    public void update(OutputSaveState tmp) {//this is for quick changes between save states which differ only by time
+        this.time = tmp.time;
+    }
 }
