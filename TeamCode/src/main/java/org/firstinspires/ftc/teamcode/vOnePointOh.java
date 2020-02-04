@@ -69,6 +69,8 @@ public class vOnePointOh extends LinearOpMode {
                 power_RL, power_RR;
         double power_Ext;
 
+        mechGrab.setPosition(1.0);
+
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             //READ INPUTS
@@ -77,30 +79,15 @@ public class vOnePointOh extends LinearOpMode {
             vR = gamepad1.right_stick_x;
             Ext = gamepad1.left_trigger;
 
-            speed = 1.000 - gamepad1.right_trigger;
 
 
 
-            if (runtime.seconds()-delay > .3){
-                if(gamepad1.x){
-                    GEAR ++;
-
-                } else if( GEAR > 4) {
-                    GEAR = 1;
-                }
-                if(gamepad1.y) {
-                    if(MODE == 0){
-                        MODE = 1;
-                    }
-                    else if(MODE ==1 ){
-                        MODE = 0;
-                    }
-                }
-                if(gamepad1.x && gamepad1.b){
-                    A0 = A;
-                }
-                delay = runtime.seconds();
+            if(gamepad1.right_bumper){
+                speed = 0.40;
+            } else {
+                speed = 1.0;
             }
+
 
             if(gamepad1.dpad_up){
                 mechGrab.setPosition(0.5);

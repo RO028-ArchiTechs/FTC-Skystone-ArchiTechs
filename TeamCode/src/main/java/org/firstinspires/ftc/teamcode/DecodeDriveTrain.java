@@ -55,6 +55,8 @@ public class DecodeDriveTrain extends LinearOpMode {
         waitForStart();
         controller.reset_runtime();
 
+
+
         //INPUT
         double vX, vY, vR;     //robot speed as commanded by driver (can be in either LOCAL or GLOBAL coordinates, depending on the MODE)
 
@@ -67,7 +69,7 @@ public class DecodeDriveTrain extends LinearOpMode {
         double delay = 0 ;          //stiu ca e cancer da atat s-a putut
         int MODE = 0;
         int GEAR = 1;
-        double Gear_shift = 0;
+        double speed = 0;
                             /* MODE 0 means simple "first person" controls, no trig tricks needed,
                              MODE 1 means controlling the robot in GLOBAL coordinates
                              (left's always left, right's always right, regardless of robot orientation)(some trig required)
@@ -83,6 +85,8 @@ public class DecodeDriveTrain extends LinearOpMode {
 
                 power_RL, power_RR;
         double power_EXT;
+
+        mechGrab.setPosition(1.0);
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -103,30 +107,16 @@ public class DecodeDriveTrain extends LinearOpMode {
 
             ext = controller.get_left_trigger();
 
-            if (controller.get_runtime().seconds()-delay > .3){
-                if (controller.get_left_bumper()){
-                    extDirection = -1;
-                } else {
-                    extDirection =1;
-                }
-                if(controller.get_x()){
-                    GEAR ++;
+            if(controller.get_right_bumper()){
+                speed = 0.40;
+            }   else {
+                speed = 1.0;
+            }
 
-                } else if( GEAR > 4) {
-                    GEAR = 1;
-                }
-                if(controller.get_y()) {
-                    if(MODE == 0){
-                        MODE = 1;
-                    }
-                    else if(MODE ==1 ){
-                        MODE = 0;
-                    }
-                }
-                if(controller.get_x() && controller.get_b()){
-                    A0 = A;
-                }
-                delay = controller.get_runtime().seconds();
+            if(controller.get_left_bumper()){
+                extDirection = -1;
+            }   else  {
+                extDirection = 1;
             }
 
             if(controller.get_dpad_up()){
@@ -134,31 +124,16 @@ public class DecodeDriveTrain extends LinearOpMode {
             } else if (controller.get_dpad_down()) {
                 mechGrab.setPosition(1);
             }
-            switch (GEAR){
-                case 1 : {
-                    Gear_shift = .25;
-                    break;
-                }
-                case 2 : {
-                    Gear_shift = .4;
-                    break;
-                }
-                case 3 : {
-                    Gear_shift = .65;
-                    break;
-                }
-                case 4 : {
-                    Gear_shift = 1;
-                    break;
-                }
-            }
+            
 
             //Apply GEAR
-            vX *= Gear_shift;
-            vY *= Gear_shift;
-            vR *= Gear_shift;
-            power_EXT = ext * extDirection * Gear_shift;
-
+            vX *= speed;
+            vY *= speed;
+            vR *= speed;
+            power_EXT = ext * extDirection;
+            LocalY = vY;
+            LocalX = vX;
+            /*
             switch (MODE) {
                 case 0: {
                     LocalY = vY;
@@ -172,7 +147,7 @@ public class DecodeDriveTrain extends LinearOpMode {
                     break;
                 }
             }
-
+             */
             // O D O M E T R Y goes HERE !!
 
             power_FL = Range.clip(+LocalX + LocalY + vR, -1.0, 1.0);
@@ -191,7 +166,7 @@ public class DecodeDriveTrain extends LinearOpMode {
             // Telemetry feedback
             telemetry.addData("Status", "Run Time: " + controller.get_runtime().toString());
             telemetry.addData("MODE", ": (%d)", MODE);
-            telemetry.addData("GEAR", ": %.2f", Gear_shift);
+            telemetry.addData("GEAR", ": %.2f", speed);
             telemetry.addData("Distance (cm)",
                     String.format(Locale.US, "%.02f", controller.getDistance()));
             telemetry.addData("Color", "\nR%.2f\nG%.2f\nB%.2f", cR, cG, cB);
