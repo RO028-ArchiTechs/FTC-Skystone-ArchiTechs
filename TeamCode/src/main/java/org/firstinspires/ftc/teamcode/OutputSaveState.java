@@ -38,6 +38,10 @@ public class OutputSaveState extends SaveState{
         this.time = controller.get_runtime().milliseconds();
         this.left_bumper = controller.get_left_bumper();
         this.left_trigger = controller.get_left_trigger();
+        this.dpad_left = controller.get_dpad_left();
+        this.dpad_right = controller.get_dpad_right();
+        this.right_bumper = controller.get_right_bumper();
+        this.right_trigger = controller.get_right_trigger();
     }
 
     public void change(OutputSaveState other) {//this copies another\s OutputSaveState fields to the current OutputSaveState
@@ -60,6 +64,10 @@ public class OutputSaveState extends SaveState{
         this.time = other.time;
         this.left_bumper = other.left_bumper;
         this.left_trigger = other.left_trigger;
+        this.dpad_left = other.dpad_left;
+        this.dpad_right = other.dpad_right;
+        this.right_bumper = other.right_bumper;
+        this.right_trigger = other.right_trigger;
     }
 
 
