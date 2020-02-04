@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cCompassSensor;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -20,7 +21,7 @@ import org.firstinspires.ftc.teamcode.DecodeController;
 import java.util.Locale;
 
 
-@TeleOp(name="#T>DecodeDrivetrain", group="Linear Opmode")
+@Autonomous(name="#T>DecodeDrivetrain", group="Linear Opmode")
 //@Disabled
 public class DecodeDriveTrain extends LinearOpMode {
 

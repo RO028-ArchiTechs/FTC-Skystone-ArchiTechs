@@ -12,12 +12,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 ///it inherits SaveState to make sure that the directory in which we save is the same for the encoder
-///and there is a need for 2 different save states because i don't know how openning a file simultaneously for writing and reading works
+//it is the SaveState variation designed for the encoding part of the replicator
 public class OutputSaveState extends SaveState{
 
     Log out = null;
 
     public OutputSaveState(EncodeController controller) {
+        //this time, the constructor need the EncodeController which provides the SaveState with all logged inputs
+        //here we initialize all of them according to the EncodeController inputs
         this.left_stick_y = controller.get_left_stick_y();
         this.left_stick_x = controller.get_left_stick_x();
         this.right_stick_y = controller.get_right_stick_y();
@@ -38,7 +40,7 @@ public class OutputSaveState extends SaveState{
         this.left_trigger = controller.get_left_trigger();
     }
 
-    public void change(OutputSaveState other) {
+    public void change(OutputSaveState other) {//this copies another\s OutputSaveState fields to the current OutputSaveState
 
         this.left_stick_y = other.left_stick_y;
         this.left_stick_x = other.left_stick_x;
@@ -61,11 +63,11 @@ public class OutputSaveState extends SaveState{
     }
 
 
-    public void init_out() {
+    public void init_out() {//initializes the output writer
         this.out = new Log(dir,file,false);
     }
 
-    public void write() {
+    public void write() {//writes all the logged date to a file
         out.addData(left_stick_y);
         out.addData(left_stick_x);
         out.addData(right_stick_y);
@@ -91,7 +93,7 @@ public class OutputSaveState extends SaveState{
         out.update();
     }
 
-    public void write_final() {
+    public void write_final() {//it is called to write the final action and then close the output writer
         this.write();
         out.close();
         out = null;

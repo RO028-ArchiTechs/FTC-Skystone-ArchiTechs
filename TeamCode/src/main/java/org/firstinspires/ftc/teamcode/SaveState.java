@@ -6,35 +6,38 @@ import android.os.Environment;
 
 import java.io.File;
 
-///saves the state of inputs on the gamepad
+//has a field for each possible input(so far)
+//it is used for replicating driver behavior
+//it also has a working directory and a file name stored, so we can assure that the replicator reads and writes to the same file via inheritance
 public class SaveState {
-    public double left_trigger;
-    public boolean left_bumper;
-    public boolean right_bumper;
-    public double right_trigger;
-    public boolean dpad_right;
-    public boolean dpad_left;
-    double left_stick_y;
-    double left_stick_x;
-    double right_stick_y;
-    double right_stick_x;
-    double direction;
-    double red;
-    double green;
-    double blue;
-    boolean a;
-    boolean b;
-    boolean x;
-    boolean y;
-    boolean dpad_up;
-    boolean dpad_down;
-    double distance;
-    double time;
+    public double left_trigger;//gamepad left trigger variable
+    public boolean left_bumper;//gamepad left bumper variable
+    public boolean right_bumper;//gamepad right bumper variable
+    public double right_trigger;//gamepad right trigger variable
+    public boolean dpad_right;//gamepad dpad right variable
+    public boolean dpad_left;//gamepad dpad left variable
+    double left_stick_y;//gamepad left stick y variable
+    double left_stick_x;//gamepad left stick x variable
+    double right_stick_y;//gamepad right stick y variable
+    double right_stick_x;//gamepad right stick x variable
+    double direction;//compass sensor direction variable
+    double red;//color sensor red variable
+    double green;//color sensor green variable
+    double blue;//color sensor blue variable
+    boolean a;//gamepad a button variable
+    boolean b;//gamepad b button variable
+    boolean x;//gamepad x button variable
+    boolean y;//gamepad y button variable
+    boolean dpad_up;//gamepad dpad up variable
+    boolean dpad_down;//gamepad dpad down variable
+    double distance;//distance sensor distance variable
+    double time;//the time at which this savestate was created
 
-    protected final static String dir = Environment.getExternalStorageDirectory().getPath() + "/" + "FIRST_";
-    protected final static String file = "save1";
+    protected final static String dir = Environment.getExternalStorageDirectory().getPath() + "/" + "FIRST_";//save state working directory
+    protected final static String file = "save1";//save state name
 
     SaveState(){
+        //intializing variables with neutral values
         left_stick_y = -1;
         left_stick_x = -1;
         right_stick_y = -1;
@@ -59,7 +62,7 @@ public class SaveState {
         right_trigger = 0;
     }
 
-    public boolean is_same(OutputSaveState other) {
+    public boolean is_same(OutputSaveState other) {//checks if a savestate is the same with another one(with no regard to time)
         return this.left_stick_y == other.left_stick_y &&
         this.left_stick_x == other.left_stick_x &&
         this.right_stick_y == other.right_stick_y &&
@@ -83,7 +86,7 @@ public class SaveState {
         this.right_trigger == other.right_trigger;
     }
 
-    public void update(OutputSaveState tmp) {
+    public void update(OutputSaveState tmp) {//this is for quick changes between save states which differ only by time
         this.time = tmp.time;
     }
 }

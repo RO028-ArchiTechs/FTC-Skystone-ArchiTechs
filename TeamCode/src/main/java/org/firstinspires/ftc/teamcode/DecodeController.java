@@ -7,25 +7,27 @@ import org.firstinspires.ftc.teamcode.GeneralController;
 import org.firstinspires.ftc.teamcode.OutputSaveState;
 
 public class DecodeController extends GeneralController {
-    InputSaveState last;
+    InputSaveState last;//the current input save state
 
     public DecodeController(LinearOpMode opmode){
-        super(opmode);
-        last = new InputSaveState();
-        last.init_in();
+        super(opmode);//we call the super of this type of encoder
+        last = new InputSaveState();//we initialize the input save state
+        last.init_in();//we intialize the input parser
     }
 
-    public void read_state() {
-        if(this.get_runtime().milliseconds() > last.time){
-            last.read();
+    public void read_state() {//we read the next InputSaveState(if necessary)
+        if(this.get_runtime().milliseconds() > last.time){//if current save state is outdated
+            last.read();//we read the next InputSaveState
         }
     }
 
-    public boolean is_invalid() {
+    public boolean is_invalid() {//checks if the InputSaveState is invalid(i.e. EOF was reached)
         return last.is_invalid();
     }
 
     @Override
+
+    //overrides all methods of the base class to feed the drivetrain with logged savestates, rather than actual inputs
 
     public double get_left_stick_y() {
         return last.left_stick_y;

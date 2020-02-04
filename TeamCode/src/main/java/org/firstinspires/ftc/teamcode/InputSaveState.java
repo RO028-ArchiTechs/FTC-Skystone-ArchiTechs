@@ -4,26 +4,27 @@ import org.firstinspires.ftc.teamcode.EncodeController;
 
 import java.io.IOException;
 
-///it inherits SaveState to make sure that the directory in which we save is the same for the decoder
-///and there is a need for 2 different save states because i don't know how openning a file simultaneously for writing and reading works
+//it inherits SaveState to make sure that the directory in which we save is the same for the decoder
+//it is the SaveState variation designed for the decoding part of the replicator
 public class InputSaveState extends SaveState{
 
-    In in;
+    In in;//input file parser
 
-    public InputSaveState() {
+    public InputSaveState() {//constructor is the same as the base class
         super();
     }
 
-    public void init_in() {
+    public void init_in() {//initializes the input file parser
         in = new In(dir,file);
     }
 
-    public boolean is_invalid() {
-        return time == -1;
+    public boolean is_invalid() {//checks if the current savestate is invalid
+        return time == -1;//this check works because if we reached EOF, than the neutral value returned is -1, so we just check if the time is -1
     }
 
     public void read() {
 
+        //reads the values in the same order that and OutputSaveState object would write them
         in.update();
         left_stick_y = in.getDouble();
         left_stick_x = in.getDouble();
